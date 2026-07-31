@@ -67,6 +67,15 @@ nodes:
            value: "ingress-ready=true"
          - name: authorization-mode
            value: "AlwaysAllow"
+   - |
+     kind: KubeletConfiguration
+     maxPods: 250
+   - |
+     kind: ClusterConfiguration
+     controllerManager:
+       extraArgs:
+       - name: "node-cidr-mask-size"
+         value: "21"
 {%- if ovn_ha is equalto "true" %}
 {%- for _ in range(1, ovn_num_master | int) %}
  - role: worker

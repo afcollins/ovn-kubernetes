@@ -792,7 +792,7 @@ set_cluster_cidr_ip_families() {
     KIND_CIDR=$KIND_CIDR_IPV4
     NET_CIDR=$NET_CIDR_IPV4
     SVC_CIDR=$SVC_CIDR_IPV4
-    echo "IPv4 Only Support: --net-cidr=$NET_CIDR --svc-cidr=$SVC_CIDR"
+    echo "IPv4 Only Support: --kind-cidr=$KIND_CIDR --net-cidr=$NET_CIDR --svc-cidr=$SVC_CIDR"
   elif [ "$PLATFORM_IPV4_SUPPORT" == false ] && [ "$PLATFORM_IPV6_SUPPORT" == true ]; then
     IP_FAMILY="ipv6"
     KIND_CIDR=$KIND_CIDR_IPV6
@@ -2235,7 +2235,7 @@ create_kind_cluster() {
     create_local_registry
   fi
 
-  kind create cluster --name "${KIND_CLUSTER_NAME}" --kubeconfig "${KUBECONFIG}" --image "${KIND_IMAGE}":"${K8S_VERSION}" --config=${KIND_CONFIG_LCL} --retain
+  kind create cluster --name "${KIND_CLUSTER_NAME}" --kubeconfig "${KUBECONFIG}" --image "${KIND_IMAGE}"":v1.36.1" --config=${KIND_CONFIG_LCL} --retain
 
   cat "${KUBECONFIG}"
 }

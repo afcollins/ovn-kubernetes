@@ -35,7 +35,7 @@ endif
 GO_VERSION ?= 1.26
 GO_IMAGE = quay.io/projectquay/golang:${GO_VERSION}
 
-OCI_BIN ?= docker
+OCI_BIN ?= podman
 
 # The image of ovnkube/ovn-daemonset-ubuntu should be multi-arched before using it on arm64
 ubuntu-image: bld
@@ -60,6 +60,7 @@ fedora-image:
 		--build-arg BUILDER_IMAGE=${GO_IMAGE} \
 		--build-arg FEDORA_BASE_DIGEST=$${FEDORA_BASE_DIGEST} \
 		--platform=linux/${ARCH} \
+		--network=host \
 		-t ${IMAGE} \
 		-f Dockerfile.fedora ./../..
 
